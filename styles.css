@@ -114,6 +114,8 @@ h1 { font-size: clamp(14px, 2vw, 21px); letter-spacing: .095em; font-weight: 700
 .camera-corners { position: absolute; inset: 19px; border: 1px solid #a3bbaa30; pointer-events: none; }
 .camera-corners::after { content: "┼"; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); color: #cde2d45e; font-size: 22px; }
 .camera-warning { display: none; position: absolute; left: 0; right: 0; top: 44%; padding: 10px; color: #ff676e; text-align: center; letter-spacing: .2em; font-size: 13px; font-weight: bold; background: #100606c9; animation: fade .55s infinite; }
+.camera.bioalert img { animation: organic-flicker 2.1s ease-in-out infinite; }
+.camera.bioalert::before { content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 1; box-shadow: inset 0 0 105px #a80b1b57; animation: bio-pulse 1.4s infinite; }
 .camera.degraded .camera-warning { display: block; }
 .camera.degraded { filter: contrast(1.3); }
 .camera.degraded::after { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(0deg, transparent 0, transparent 19px, #bfc8b115 21px, #330c0d65 23px, transparent 27px); pointer-events: none; animation: interference .23s steps(2) infinite; }
@@ -166,6 +168,8 @@ body.crashing .noise { opacity: .65; }
 .crack-one { top: 0; left: 0; transform: rotate(42deg); }
 .crack-two { right: -20vw; top: 12%; transform: rotate(144deg); }
 .crack-three { left: 8%; bottom: 4%; transform: rotate(-32deg); }
+@keyframes organic-flicker { 0%, 100% { filter: grayscale(.5) contrast(1.2) brightness(.72) sepia(.22); } 50% { filter: grayscale(.25) contrast(1.5) brightness(.56) sepia(.65) hue-rotate(-22deg); } }
+@keyframes bio-pulse { 50% { opacity: .27; } }
 @keyframes pulse { 50% { opacity: .35; box-shadow: none; } }
 @keyframes fade { 50% { opacity: .23; } }
 @keyframes arrival { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: none; } }
