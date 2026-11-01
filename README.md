@@ -22,15 +22,24 @@ Los tiempos son aproximados y se controlan desde `script.js`.
 
 - **REINICIAR** o tecla **R**: vuelve al comienzo.
 - **PAUSAR / REANUDAR** o **espacio**: congela la secuencia.
-- **AUDIO ON/OFF**: activa pitidos sintetizados. **Inicia apagado** para que el navegador no bloquee la reproducción automática; no hay archivos de audio ni música externa.
+- **ACTIVAR AUDIO / AUDIO ON/OFF**: habilita pitidos y el MP3 que subiste. **Inicia apagado** por las restricciones de los navegadores.
 
-## Añadir una imagen de SCP-610
+## Imagen y audio que ya subiste
 
-El panel de cámara muestra un marcador de posición hasta que agregues:
+¡La carpeta `assets/` ya existe correctamente! En GitHub, una carpeta aparece cuando contiene archivos; no se puede crear una carpeta vacía como en Windows.
 
-`assets/scp-610.jpg`
+Organicé **copias** de tus dos archivos sin borrar los originales:
 
-Crea la carpeta `assets` en GitHub, sube una imagen con ese nombre y la página la mostrará automáticamente. Puede ser una ilustración creada por ustedes, o una imagen que tengan derecho a usar. **Si empleas una imagen de la wiki SCP, conserva los créditos y la licencia de su fuente.** Para sustituir el nombre o la ruta, cambia el atributo `src` de `scpImage` en `index.html`.
+- `assets/scp-610.jpg`: imagen que aparece en la cámara de contención.
+- `assets/containment-breach.mp3`: audio de emergencia que comienza alrededor del **segundo 10**, cuando se declara `ACTIVIDAD EMERGENTE`.
+
+La cinemática **empieza automáticamente al cargar la página**, sin menú ni botón de inicio.
+
+**Importante:** los navegadores bloquean habitualmente audio automático. Para oír el MP3, pulsa **ACTIVAR AUDIO** durante los primeros diez segundos. El sonido se reproduce después en el momento de la brecha. Si el navegador lo bloquea de todos modos, vuelve a pulsar el control. Si no activas el sonido, la cinemática visual sigue funcionando normalmente.
+
+El archivo `Assets` (con mayúscula, en la raíz) es un **archivo normal**, no una carpeta. Lo conservé intacto para no eliminar nada que hubieras subido.
+
+Puedes cambiar imagen o sonido reemplazando las versiones de `assets/`. Si los archivos pertenecen a terceros, revisa sus permisos antes de publicar la página.
 
 ## Publicar con GitHub Pages
 
@@ -58,4 +67,4 @@ Obra fan no oficial, sin afiliación con la Fundación SCP.
 
 El texto y la adaptación narrativa de este homenaje se ofrecen bajo **Creative Commons Atribución-CompartirIgual 3.0 (CC BY-SA 3.0)**, de acuerdo con la licencia de la SCP Wiki: https://creativecommons.org/licenses/by-sa/3.0/
 
-La interfaz se programó específicamente para este proyecto: no se copiaron los archivos ni las imágenes del juego de referencia. No se incluye ninguna imagen de SCP-610 en el repositorio.
+La interfaz se programó específicamente para este proyecto: no se copiaron los archivos ni las imágenes del juego de referencia. Se incluye la imagen y el audio aportados por quien dirige la partida; verifica los derechos de esos recursos si publicas la página.
