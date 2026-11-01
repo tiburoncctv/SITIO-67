@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090b0c">
+  <meta name="description" content="Terminal de monitoreo del Sitio-67. Fundación SCP. Acceso restringido.">
+  <title>SITIO-67 // TERMINAL DE MONITOREO</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+  <main class="station" id="station">
+    <div class="window-bar">
+      <div class="window-mark"><span class="window-diamond">◆</span> FUNDACIÓN SCP / SITIO-67</div>
+      <div class="window-badges"><span>CONEXIÓN LOCAL</span><span class="window-close">×</span></div>
+    </div>
+    <div class="topline">
+      <div class="identity">
+        <div class="symbol" aria-hidden="true"><span>◉</span><small>67</small></div>
+        <div><p class="eyebrow">FUNDACIÓN SCP · DEPARTAMENTO DE SEGURIDAD</p><h1>TERMINAL DE MONITOREO <span class="divider-small">/</span> SITIO-67</h1><p class="sub">INTERFAZ DE CONTENCIÓN AUTÓNOMA · NIVEL DE ACCESO 3</p></div>
+      </div>
+      <div class="clock"><span>HORA DEL SISTEMA</span><strong id="clock">02:10:00</strong><small>RED INTERNA // NODO 067</small></div>
+    </div>
+    <div class="status-banner" id="statusBanner" role="status" aria-live="polite">
+      <span class="status-indicator" id="statusDot"></span>
+      <span id="statusText">DIAGNÓSTICO AUTOMÁTICO EN CURSO</span>
+      <span class="status-extra" id="statusExtra">ESTADO: NORMAL</span>
+    </div>
+    <div class="board">
+      <section class="panel activity-panel" aria-labelledby="activityHeading">
+        <header class="panel-title"><h2 id="activityHeading">CONSOLA DE EVENTOS</h2><span>SYS.LOG / S67</span></header>
+        <div class="console-top"><span><span class="green">●</span> SISTEMA OPERATIVO: AEGIS-67</span><span class="console-live" id="consoleLive">MONITOREANDO...</span></div>
+        <div class="log" id="eventLog" role="log" aria-label="Registro de actividad" aria-live="off"></div>
+        <div class="terminal-prompt"><span>S67:~#</span><span id="promptText">esperando respuesta del sistema</span><i class="caret" aria-hidden="true"></i></div>
+      </section>
+      <aside class="panel camera-panel" aria-labelledby="cameraHeading">
+        <header class="panel-title"><h2 id="cameraHeading">CÁMARA DE CONTENCIÓN</h2><span id="camStatus">CCTV-610 / EN ESPERA</span></header>
+        <div class="camera" id="camera">
+          <img id="scpImage" src="assets/scp-610.jpg" alt="Archivo fotográfico del fenómeno de SCP-610" hidden>
+          <div class="camera-placeholder" id="cameraPlaceholder">
+            <div class="target" aria-hidden="true">┼</div>
+            <span>ARCHIVO VISUAL CLASIFICADO</span>
+            <small>IMAGEN SCP-610 / NO CARGADA</small>
+            <small class="path-note">assets/scp-610.jpg</small>
+          </div>
+          <div class="camera-overlay"><span><b class="rec-dot"></b> REC ● CAM 07</span><span id="camTimestamp">02:10:00</span></div>
+          <div class="camera-corners" aria-hidden="true"></div>
+          <div class="camera-warning" id="cameraWarning">SEÑAL DEGRADADA</div>
+        </div>
+        <div class="camera-data"><span>SECTOR BIOCONTENCIÓN // SUBNIVEL -04</span><span id="cameraSignal">SEÑAL 100%</span></div>
+        <section class="systems" aria-labelledby="systemsHeading">
+          <div class="section-label"><h3 id="systemsHeading">ESTADO DE SUBSISTEMAS</h3><span id="systemCount">6 / 6 OPERATIVOS</span></div>
+          <div class="system-list" id="systemList">
+            <div class="system" data-key="cells"><span>COMPARTIMIENTOS DE CONTENCIÓN</span><strong class="green">OPERATIVO</strong></div>
+            <div class="system" data-key="flame"><span>LANZALLAMAS AUTOMATIZADOS</span><strong class="green">OPERATIVO</strong></div>
+            <div class="system" data-key="locks"><span>CIERRES DE SEGURIDAD</span><strong class="green">OPERATIVO</strong></div>
+            <div class="system" data-key="power"><span>ENERGÍA DE EMERGENCIA</span><strong class="green">OPERATIVO</strong></div>
+            <div class="system" data-key="security"><span>PERSONAL DE SEGURIDAD</span><strong class="green">OPERATIVO</strong></div>
+            <div class="system" data-key="comms"><span>COMUNICACIONES EXTERNAS</span><strong class="green">OPERATIVO</strong></div>
+          </div>
+        </section>
+      </aside>
+    </div>
+    <div class="bottomline"><div class="sequence"><span>SECUENCIA DE VALIDACIÓN</span><div class="segments" id="progressSegments" aria-hidden="true"></div><span class="percent" id="percent">00%</span></div><div class="operator">OPERADOR: [AUTOMATIZADO] · PRIORIDAD: <b id="priority">RUTINA</b></div></div>
+    <footer class="controlbar"><div class="left-controls"><button class="command" id="restartButton" type="button">↻ REINICIAR</button><button class="command" id="pauseButton" type="button">Ⅱ PAUSAR</button><button class="command" id="soundButton" type="button" aria-pressed="false">♪ AUDIO: OFF</button></div><p>R = REINICIAR &nbsp;·&nbsp; ESPACIO = PAUSAR</p></footer>
+  </main>
+  <section class="failure" id="failure" aria-labelledby="failureTitle" hidden>
+    <div class="crack crack-one" aria-hidden="true"></div><div class="crack crack-two" aria-hidden="true"></div><div class="crack crack-three" aria-hidden="true"></div>
+    <p class="failure-code">FUNDACIÓN SCP // SITIO-67</p>
+    <div class="failure-icon">⚠</div>
+    <h2 id="failureTitle">CONEXIÓN PERDIDA</h2>
+    <p>TERMINAL DE MONITOREO SIN RESPUESTA</p>
+    <p class="failure-last">ÚLTIMA TRANSMISIÓN: «DESPACHANDO MTF MÁS CERCA»</p>
+    <p class="failure-unknown">ESTADO DEL SITIO: DESCONOCIDO</p>
+    <button id="failureRestart" type="button">REINICIAR TRANSMISIÓN ▸</button>
+  </section>
+  <div class="impact" id="impact" aria-hidden="true"></div>
+  <div class="credits">HOMENAJE FAN A LA <a href="https://scp-wiki.wikidot.com/" target="_blank" rel="noopener noreferrer">FUNDACIÓN SCP</a> · INSPIRADO EN <a href="https://scp-wiki.wikidot.com/billiths-proposal-ii" target="_blank" rel="noopener noreferrer">BILLITH'S PROPOSAL II</a> · BASADO EN <a href="https://scp-wiki.wikidot.com/scp-610" target="_blank" rel="noopener noreferrer">SCP-610</a></div>
+</body>
+</html>
