@@ -42,6 +42,14 @@ El archivo `Assets` (con mayúscula, en la raíz) sigue siendo un archivo normal
 
 Para cambiar las pistas en el futuro, modifica las rutas de `alarmTrack` y `betaTrack` al principio de `script.js`. Si los audios son de terceros, revisa los permisos correspondientes antes de publicar el sitio.
 
+## Vista previa sin spoilers (Instagram y otras redes)
+
+La imagen de vista previa del enlace es `assets/preview-sitio67.png`: una tarjeta gráfica de acceso restringido con el nombre del Sitio-67, sin la fotografía de SCP-610. En `index.html` se declara mediante `og:image`, con proporciones **1200 × 630**.
+
+La fotografía `assets/scp-610.jpg` ahora se carga dinámicamente mediante `data-src` y JavaScript; sigue apareciendo normalmente durante la cinemática, pero no como una etiqueta `<img src>` visible para los lectores simples de metadatos.
+
+**Nota:** Instagram decide cómo renderizar la vista previa y puede mantener una versión anterior en caché. Si sigue mostrando la imagen vieja, prueba compartir de nuevo después de que GitHub Pages termine de publicar y solicita una nueva lectura en [Meta Sharing Debugger](https://developers.facebook.com/tools/debug/). La vista previa no está garantizada para todas las aplicaciones.
+
 ## Publicar con GitHub Pages
 
 1. Abre **Settings → Pages** en este repositorio.
