@@ -24,22 +24,23 @@ Los tiempos son aproximados y se controlan desde `script.js`.
 - **PAUSAR / REANUDAR** o **espacio**: congela la secuencia.
 - **ACTIVAR AUDIO / AUDIO ON/OFF**: habilita pitidos y el MP3 que subiste. **Inicia apagado** por las restricciones de los navegadores.
 
-## Imagen y audio que ya subiste
+## Imagen y bandas sonoras
 
-¡La carpeta `assets/` ya existe correctamente! En GitHub, una carpeta aparece cuando contiene archivos; no se puede crear una carpeta vacía como en Windows.
+La carpeta `assets/` contiene la imagen y los audios de la intro:
 
-Organicé **copias** de tus dos archivos sin borrar los originales:
+- `assets/scp-610.jpg`: imagen de la cámara de contención.
+- `assets/SCP LOCKDOWM ALARM_Blackout(OLD)OUTDATED(CRINGE).mp3`: **alarma SCP Lockdown**, comienza en **00:10.18** junto con `ACTIVIDAD EMERGENTE` y se mantiene (en bucle si hiciera falta) hasta **00:24.20**.
+- `assets/MTF Beta-7 Maz Hatters entry announcement.mp3`: **anuncio de Beta-7**, comienza exactamente cuando la pantalla se rompe, a **00:24.20**, y se reproduce hasta terminar por sí solo.
 
-- `assets/scp-610.jpg`: imagen que aparece en la cámara de contención.
-- `assets/containment-breach.mp3`: audio de emergencia que comienza alrededor del **segundo 10**, cuando se declara `ACTIVIDAD EMERGENTE`.
+El archivo anterior `assets/containment-breach.mp3` se conserva como copia, pero **ya no se reproduce**.
 
-La cinemática **empieza automáticamente al cargar la página**, sin menú ni botón de inicio.
+La cinemática **empieza inmediatamente al cargar la página**. Para permitir audio, pulsa **ACTIVAR AUDIO** antes de la primera alerta; algunos navegadores no permiten sonido hasta recibir un clic. Si bloquean el anuncio de Beta-7, aparecerá el botón **REPRODUCIR ANUNCIO BETA-7** en la pantalla final.
 
-**Importante:** los navegadores bloquean habitualmente audio automático. Para oír el MP3, pulsa **ACTIVAR AUDIO** durante los primeros diez segundos. El sonido se reproduce después en el momento de la brecha. Si el navegador lo bloquea de todos modos, vuelve a pulsar el control. Si no activas el sonido, la cinemática visual sigue funcionando normalmente.
+Al pulsar **PAUSAR**, la alarma también se pausa; con **REANUDAR** continúa. **REINICIAR** detiene ambos audios y comienza otra vez.
 
-El archivo `Assets` (con mayúscula, en la raíz) es un **archivo normal**, no una carpeta. Lo conservé intacto para no eliminar nada que hubieras subido.
+El archivo `Assets` (con mayúscula, en la raíz) sigue siendo un archivo normal, no una carpeta; se conserva intacto.
 
-Puedes cambiar imagen o sonido reemplazando las versiones de `assets/`. Si los archivos pertenecen a terceros, revisa sus permisos antes de publicar la página.
+Para cambiar las pistas en el futuro, modifica las rutas de `alarmTrack` y `betaTrack` al principio de `script.js`. Si los audios son de terceros, revisa los permisos correspondientes antes de publicar el sitio.
 
 ## Publicar con GitHub Pages
 
