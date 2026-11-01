@@ -14,9 +14,13 @@
   const systems = Array.from(document.querySelectorAll(".system"));
   const TOTAL = 24.2;
   const BREACH_AT = 10.18;
-  const alarmTrack = new Audio("assets/containment-breach.mp3");
+  const alarmTrack = new Audio("assets/SCP LOCKDOWM ALARM_Blackout(OLD)OUTDATED(CRINGE).mp3");
   alarmTrack.preload = "auto";
+  alarmTrack.loop = true;
   alarmTrack.volume = .8;
+  const betaTrack = new Audio("assets/MTF Beta-7 Maz Hatters entry announcement.mp3");
+  betaTrack.preload = "auto";
+  betaTrack.volume = .9;
   const checks = [
     ["INICIALIZANDO MATRIZ DE SEGURIDAD", "OK"],
     ["AUTENTICACIÓN DEL NODO 067", "OK"],
@@ -118,6 +122,21 @@
       soundOn = false;
       el("soundButton").textContent = "♪ CLIC PARA ACTIVAR AUDIO";
       el("soundButton").setAttribute("aria-pressed", "false");
+    }
+  }
+
+  function startBetaTrack() {
+    if (!soundOn) return;
+    betaTrack.currentTime = 0;
+    try {
+      const playback = betaTrack.play();
+      if (playback && typeof playback.catch === "function") {
+        playback.catch(() => {
+          el("betaReplay").hidden = false;
+        });
+      }
+    } catch (error) {
+      el("betaReplay").hidden = false;
     }
   }
 
@@ -268,6 +287,10 @@
     if (crashing) return;
     crashing = true;
     running = false;
+    alarmTrack.pause();
+    alarmTrack.currentTime = 0;
+    alarmStarted = false;
+    startBetaTrack();
     document.body.classList.add("crashing");
     crashTimer = window.setTimeout(() => {
       document.body.classList.remove("crashing");
@@ -283,7 +306,10 @@
     if (crashTimer !== null) clearTimeout(crashTimer);
     alarmTrack.pause();
     alarmTrack.currentTime = 0;
+    betaTrack.pause();
+    betaTrack.currentTime = 0;
     alarmStarted = false;
+    el("betaReplay").hidden = true;
     camera.classList.remove("bioalert");
     crashTimer = null;
     elapsed = 0;
@@ -350,6 +376,29 @@
     if (ended || crashing) return;
     running = !running;
     el("pauseButton").textContent = running ? "Ⅱ PAUSAR" : "▶ REANUDAR";
+    if (!running) {
+      alarmTrack.pause();
+    } else if (soundOn && elapsed >= BREACH_AT) {
+      if (alarmStarted) {
+        alarmTrack.play().catch(() => {
+          alarmStarted = false;
+          el("soundButton").textContent = "♪ CLIC PARA ACTIVAR AUDIO";
+        });
+      } else {
+        startAlarmTrack();
+      }
+    }
+  });
+  el("betaReplay").addEventListener("click", () => {
+    soundOn = true;
+    el("soundButton").textContent = "♪ AUDIO: ON";
+    el("soundButton").setAttribute("aria-pressed", "true");
+    const playback = betaTrack.play();
+    if (playback && typeof playback.then === "function") {
+      playback.then(() => { el("betaReplay").hidden = true; }).catch(() => {});
+    } else {
+      el("betaReplay").hidden = true;
+    }
   });
   el("soundButton").addEventListener("click", () => {
     soundOn = !soundOn;
@@ -357,10 +406,12 @@
     el("soundButton").setAttribute("aria-pressed", String(soundOn));
     if (soundOn) {
       tone(710, .09);
-      if (elapsed >= BREACH_AT && elapsed < TOTAL) startAlarmTrack();
+      if (running && elapsed >= BREACH_AT && elapsed < TOTAL) startAlarmTrack();
     } else {
       alarmTrack.pause();
       alarmTrack.currentTime = 0;
+      betaTrack.pause();
+      betaTrack.currentTime = 0;
       alarmStarted = false;
     }
   });
