@@ -13,6 +13,10 @@
   const progress = el("progressSegments");
   const systems = Array.from(document.querySelectorAll(".system"));
   const TOTAL = 24.2;
+  const BREACH_AT = 10.18;
+  const alarmTrack = new Audio("assets/containment-breach.mp3");
+  alarmTrack.preload = "auto";
+  alarmTrack.volume = .8;
   const checks = [
     ["INICIALIZANDO MATRIZ DE SEGURIDAD", "OK"],
     ["AUTENTICACIÓN DEL NODO 067", "OK"],
@@ -36,6 +40,7 @@
   let crashing = false;
   let soundOn = false;
   let audio = null;
+  let alarmStarted = false;
   let crashTimer = null;
   const states = Object.create(null);
   const blocks = [];
@@ -82,7 +87,7 @@
       oscillator.type = type || "sine";
       oscillator.frequency.setValueAtTime(frequency, audio.currentTime);
       gain.gain.setValueAtTime(0.0001, audio.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.065, audio.currentTime + 0.015);
+      gain.gain.exponentialRampToValueAtTime(alarmTrack.paused ? 0.055 : 0.018, audio.currentTime + 0.015);
       gain.gain.exponentialRampToValueAtTime(0.0001, audio.currentTime + duration);
       oscillator.connect(gain);
       gain.connect(audio.destination);
@@ -91,6 +96,28 @@
     } catch (error) {
       soundOn = false;
       el("soundButton").textContent = "♪ AUDIO: NO DISPONIBLE";
+    }
+  }
+
+  function startAlarmTrack() {
+    if (!soundOn || alarmStarted) return;
+    alarmStarted = true;
+    alarmTrack.currentTime = 0;
+    try {
+      const playback = alarmTrack.play();
+      if (playback && typeof playback.catch === "function") {
+        playback.catch(() => {
+          alarmStarted = false;
+          soundOn = false;
+          el("soundButton").textContent = "♪ CLIC PARA ACTIVAR AUDIO";
+          el("soundButton").setAttribute("aria-pressed", "false");
+        });
+      }
+    } catch (error) {
+      alarmStarted = false;
+      soundOn = false;
+      el("soundButton").textContent = "♪ CLIC PARA ACTIVAR AUDIO";
+      el("soundButton").setAttribute("aria-pressed", "false");
     }
   }
 
@@ -144,6 +171,8 @@
   schedule(9.72, () => { addLog("TODOS LOS SUBSISTEMAS RESPONDEN. SITIO-67 ESTABLE."); tone(820, .12); });
   schedule(10.18, () => {
     setAlarm("ACTIVIDAD EMERGENTE", "warn", "ORIGEN: SECTOR DE BIOCONTENCIÓN");
+    startAlarmTrack();
+    camera.classList.add("bioalert");
     addLog("ACTIVIDAD EMERGENTE // SENSOR BIOLÓGICO 610", "critical");
     addLog("CRECIMIENTO DE MASA ORGÁNICA FUERA DE PARÁMETROS", "warn");
     el("promptText").textContent = "evaluando firmas biológicas...";
@@ -252,6 +281,10 @@
 
   function reset() {
     if (crashTimer !== null) clearTimeout(crashTimer);
+    alarmTrack.pause();
+    alarmTrack.currentTime = 0;
+    alarmStarted = false;
+    camera.classList.remove("bioalert");
     crashTimer = null;
     elapsed = 0;
     cursor = 0;
@@ -322,7 +355,14 @@
     soundOn = !soundOn;
     el("soundButton").textContent = soundOn ? "♪ AUDIO: ON" : "♪ AUDIO: OFF";
     el("soundButton").setAttribute("aria-pressed", String(soundOn));
-    if (soundOn) tone(710, .09);
+    if (soundOn) {
+      tone(710, .09);
+      if (elapsed >= BREACH_AT && elapsed < TOTAL) startAlarmTrack();
+    } else {
+      alarmTrack.pause();
+      alarmTrack.currentTime = 0;
+      alarmStarted = false;
+    }
   });
   document.addEventListener("keydown", (event) => {
     const element = event.target;
