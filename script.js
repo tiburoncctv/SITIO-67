@@ -281,6 +281,8 @@
     image.hidden = true;
     imagePlaceholder.hidden = false;
   });
+  // Load the classified photograph in-browser; social crawlers see only the public-safe cover.
+  if (image.dataset.src) image.src = image.dataset.src;
   if (image.complete && image.naturalWidth) showImage();
 
   function startCrash() {
