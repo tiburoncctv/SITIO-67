@@ -164,6 +164,7 @@ body.crashing .noise { opacity: .65; }
 .failure-unknown { color: #d4d4ce; margin-bottom: 40px; }
 .failure button { z-index: 2; background: #2a1316; border-color: #823136; color: #f18b8e; padding: 12px 24px; }
 .failure button:hover { background: #5a1b20; border-color: #fa727b; }
+.failure #betaReplay { margin-bottom: 12px; }
 .crack { position: absolute; pointer-events: none; height: 1px; width: 65vw; background: #8c424633; transform-origin: left center; }
 .crack-one { top: 0; left: 0; transform: rotate(42deg); }
 .crack-two { right: -20vw; top: 12%; transform: rotate(144deg); }
