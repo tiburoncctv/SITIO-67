@@ -86,7 +86,7 @@ h1 { font-size: clamp(14px, 2vw, 21px); letter-spacing: .095em; font-weight: 700
 .amber { color: var(--amber) !important; }
 .red { color: var(--red) !important; }
 .log {
-  height: 510px; min-height: 340px; overflow-y: auto; padding: 18px 14px 16px;
+  height: clamp(300px, 41vh, 470px); min-height: 300px; overflow-y: auto; padding: 18px 14px 16px;
   scrollbar-width: thin; scrollbar-color: #3b5445 #111514; line-height: 1.65;
   background: radial-gradient(ellipse at center, #10201820, transparent 85%);
 }
