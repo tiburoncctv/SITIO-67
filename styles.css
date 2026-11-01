@@ -13,6 +13,7 @@
   --display: "Courier New", "Liberation Mono", monospace;
 }
 * { box-sizing: border-box; }
+[hidden] { display: none !important; }
 html { min-height: 100%; background: var(--bg); }
 body {
   min-height: 100vh; margin: 0; padding: 5vh clamp(12px, 4vw, 70px) 30px;
